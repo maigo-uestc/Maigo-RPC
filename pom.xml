@@ -1,0 +1,29 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.maigo.rpc</groupId>
+  <artifactId>Maigo-RPC</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <dependencies>
+	<dependency>
+	    <groupId>io.netty</groupId>
+	    <artifactId>netty-all</artifactId>
+	    <version>4.0.23.Final</version>
+	    <scope>compile</scope>
+	</dependency>	 
+	<dependency>
+		<groupId>de.javakaffee</groupId>
+		<artifactId>kryo-serializers</artifactId>
+		<version>0.36</version>
+	</dependency>
+	<dependency>
+		<groupId>com.esotericsoftware</groupId>
+		<artifactId>reflectasm</artifactId>
+		<version>1.11.0</version>
+	</dependency>
+	<dependency>
+		<groupId>junit</groupId>
+		<artifactId>junit</artifactId>
+		<version>4.12</version>
+</dependency>
+  </dependencies>
+</project>
