@@ -16,15 +16,15 @@ Usage
 	
 2.Use in sync way - Build a client proxy
 
-  jUnitTestInterface = RpcClientProxyBuilder.create(JUnitTestInterface.class)
-  .timeout(2000)
-  .threads(4)
-  .hook(hook)
-  .connect("127.0.0.1", 3721)
-  .build();
+  JUnitTestInterface jUnitTestInterface = RpcClientProxyBuilder.create(JUnitTestInterface.class)
+  		.timeout(2000)
+  		.threads(4)
+  		.hook(hook)
+  		.connect("127.0.0.1", 3721)
+  		.build();
 												
-	jUnitTestInterface.methodWithoutArg();
-	jUnitTestInterface.methodWithArgs("age", 23);
+jUnitTestInterface.methodWithoutArg();
+jUnitTestInterface.methodWithArgs("age", 23);
 	......(use the client proxy just as a simple proxy object)
 	
 3.Also support async way - Build an async client proxy
