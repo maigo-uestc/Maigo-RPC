@@ -17,11 +17,11 @@ Usage
 2.Use in sync way - Build a client proxy
 
   jUnitTestInterface = RpcClientProxyBuilder.create(JUnitTestInterface.class)
-		.timeout(2000)
-		.threads(4)
-		.hook(hook)
-		.connect("127.0.0.1", 3721)
-		.build();
+  .timeout(2000)
+  .threads(4)
+  .hook(hook)
+  .connect("127.0.0.1", 3721)
+  .build();
 												
 	jUnitTestInterface.methodWithoutArg();
 	jUnitTestInterface.methodWithArgs("age", 23);
