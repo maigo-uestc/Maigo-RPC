@@ -1,5 +1,7 @@
 # Maigo-RPC
 A simple RPC framework base on Netty and KryoSerializer.
+
+
 Usage
 1.Start up the server.
     JUnitTestInterfaceImpl jUnitTestInterfaceImpl = new JUnitTestInterfaceImpl();
