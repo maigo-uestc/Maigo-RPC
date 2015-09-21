@@ -16,7 +16,8 @@ Usage
 	
 2.Use in sync way - Build a client proxy
 
-    JUnitTestInterface jUnitTestInterface = RpcClientProxyBuilder.create(JUnitTestInterface.class)
+    JUnitTestInterface jUnitTestInterface = 
+    	RpcClientProxyBuilder.create(JUnitTestInterface.class)
   		.timeout(2000)
   		.threads(4)
   		.hook(hook)
@@ -27,7 +28,7 @@ Usage
     jUnitTestInterface.methodWithArgs("age", 23);
 	......(use the client proxy just as a simple proxy object)
 	
-3.Also support async way - Build an async client proxy
+3.Also support async way - Build an async client proxy. 
   RpcFuture can be used to get result or exception by call RpcFuture.get() or RpcFuture.setRpcFutureListener()
 
     rpcClientAsyncProxy = RpcClientProxyBuilder.create(JUnitTestInterface.class)
@@ -50,6 +51,6 @@ Usage
 				System.out.println("onException:"+throwable);
 			}
 		});
-	String result = rpcFuture.get();
+    String result = rpcFuture.get();
 	
 more usage can be seen in com.maigo.rpc.test package
