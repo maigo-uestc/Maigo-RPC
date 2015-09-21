@@ -2,16 +2,16 @@
 A simple RPC framework base on Netty and KryoSerializer.
 
 
-Usage
+Usage 
 1.Start up the server.
     JUnitTestInterfaceImpl jUnitTestInterfaceImpl = new JUnitTestInterfaceImpl();
-		RpcServer rpcServer = RpcServerBuilder.create()
-				  .serviceInterface(JUnitTestInterface.class)
-				  .serviceProvider(jUnitTestInterfaceImpl)
-				  .threads(4)
-				  .bind(3721)
-				  .build();
-		rpcServer.start();
+	RpcServer rpcServer = RpcServerBuilder.create()
+				 	.serviceInterface(JUnitTestInterface.class)
+				  	.serviceProvider(jUnitTestInterfaceImpl)
+				  	.threads(4)
+				  	.bind(3721)
+				  	.build();
+	rpcServer.start();
 	
 2.Use in sync way - Build a client proxy
   jUnitTestInterface = RpcClientProxyBuilder.create(JUnitTestInterface.class)
