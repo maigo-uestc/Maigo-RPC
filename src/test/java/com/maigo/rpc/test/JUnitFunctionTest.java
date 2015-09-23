@@ -203,7 +203,7 @@ public class JUnitFunctionTest
 		}
 		
 		
-		//2.test for get a result by RpcFutureListener
+		//2.test for get a exception by RpcFutureListener
 		countDownLatch = new CountDownLatch(1);
 		rpcFuture = rpcClientAsyncProxy.call("methodThrowException");
 		assertNotNull(rpcFuture);
