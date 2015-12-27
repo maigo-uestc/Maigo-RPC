@@ -28,10 +28,10 @@ public class RpcClientAsyncProxy
 		if(!serviceMethodSet.contains(methodName))
 			throw new RpcMethodNotFoundException(methodName);
 		
-		Object callResult = rpcClient.call(methodName, args);
+		RpcFuture callResult = rpcClient.call(methodName, args);
 		
 		if(callResult != null)
-			return (RpcFuture)callResult;	
+			return callResult;
 		else
 		{
 			InfoPrinter.println("RpcClient is unavailable when disconnect with the server.");

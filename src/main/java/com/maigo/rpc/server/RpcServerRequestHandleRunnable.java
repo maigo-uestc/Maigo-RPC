@@ -57,10 +57,9 @@ public class RpcServerRequestHandleRunnable implements Runnable
 				result = methodAccess.invoke(serviceProvider, lastMethodIndex, args);
 				
 				Channel channel = rpcRequestWrapper.getChannel();
-				RpcResponse rpcResponse = new RpcResponse();
-				rpcResponse.setId(rpcRequestWrapper.getId());
-				rpcResponse.setResult(result);
-				rpcResponse.setInvokeSuccess(true);
+
+				int id = rpcRequestWrapper.getId();
+				RpcResponse rpcResponse = new RpcResponse(id, result, true);
 				channel.writeAndFlush(rpcResponse);
 					
 				if(rpcInvokeHook != null)
@@ -69,10 +68,8 @@ public class RpcServerRequestHandleRunnable implements Runnable
 			catch (Exception e) 
 			{
 				Channel channel = rpcRequestWrapper.getChannel();
-				RpcResponse rpcResponse = new RpcResponse();
-				rpcResponse.setId(rpcRequestWrapper.getId());
-				rpcResponse.setThrowable(e);
-				rpcResponse.setInvokeSuccess(false);
+				int id = rpcRequestWrapper.getId();
+				RpcResponse rpcResponse = new RpcResponse(id, e, false);
 				channel.writeAndFlush(rpcResponse);
 			} 
 		}

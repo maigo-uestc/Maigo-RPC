@@ -11,7 +11,7 @@ public class KryoHolder
 			Kryo kryo = new KryoReflectionFactory();
 						
 			return kryo;
-		};
+		}
 	};
 	
 	public static Kryo get()

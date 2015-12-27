@@ -6,6 +6,6 @@ public class RpcTimeoutException extends RuntimeException
 
 	public RpcTimeoutException()
 	{
-		super("");
+		super("time out when calling a Rpc Invoke!");
 	}
 }

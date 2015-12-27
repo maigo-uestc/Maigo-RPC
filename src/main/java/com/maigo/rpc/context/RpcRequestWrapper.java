@@ -7,8 +7,8 @@ import io.netty.channel.Channel;
  */
 public class RpcRequestWrapper
 {
-	private RpcRequest rpcRequest;
-	private Channel channel;
+	private final RpcRequest rpcRequest;
+	private final Channel channel;
 	
 	public RpcRequestWrapper(RpcRequest rpcRequest, Channel channel) 
 	{

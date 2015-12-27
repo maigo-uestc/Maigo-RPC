@@ -2,9 +2,9 @@ package com.maigo.rpc.context;
 
 public class RpcRequest 
 {
-	int id;
-	String methodName;
-	Object[] args;
+	private final int id;
+	private final String methodName;
+	private final Object[] args;
 	
 	public RpcRequest(int id, String methodName, Object[] args) 
 	{

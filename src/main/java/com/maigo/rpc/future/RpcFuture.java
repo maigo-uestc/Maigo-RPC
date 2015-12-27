@@ -2,6 +2,7 @@ package com.maigo.rpc.future;
 
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.locks.AbstractQueuedSynchronizer;
 
 import com.maigo.rpc.exception.RpcTimeoutException;
 
@@ -14,7 +15,7 @@ public class RpcFuture
 	private CountDownLatch countDownLatch;
 	private Object result;
 	private Throwable throwable;
-	private int state;
+	private volatile int state;
 	private RpcFutureListener rpcFutureListener = null;
 	
 	public RpcFuture()
@@ -25,14 +26,7 @@ public class RpcFuture
 	
 	public Object get() throws Throwable
 	{
-		try 
-		{
-			countDownLatch.await();
-		} 
-		catch (InterruptedException e) 
-		{
-			e.printStackTrace();
-		}
+		countDownLatch.await();
 		
 		if(state == STATE_SUCCESS)
 			return result;
@@ -44,15 +38,8 @@ public class RpcFuture
 	
 	public Object get(long timeout) throws Throwable
 	{
-		boolean awaitSuccess = true;
-		try 
-		{
-			awaitSuccess = countDownLatch.await(timeout, TimeUnit.MILLISECONDS);
-		} 
-		catch (InterruptedException e) 
-		{
-			e.printStackTrace();
-		}
+		boolean awaitSuccess;
+		awaitSuccess = countDownLatch.await(timeout, TimeUnit.MILLISECONDS);
 		
 		if(!awaitSuccess)
 			throw new RpcTimeoutException();
@@ -69,8 +56,12 @@ public class RpcFuture
 	 * get result successfully
 	 * @param result
 	 */
-	public void setResult(Object result) 
+	public synchronized void setResult(Object result)
 	{
+        if(state != STATE_AWAIT)
+            throw new IllegalStateException("can not set result to a RpcFuture instance which has already get result " +
+                    "or throwable!");
+
 		this.result = result;
 		state = STATE_SUCCESS;
 		
@@ -84,8 +75,12 @@ public class RpcFuture
 	 * exception occur when invoke
 	 * @param throwable
 	 */
-	public void setThrowable(Throwable throwable) 
+	public synchronized void setThrowable(Throwable throwable)
 	{
+        if(state != STATE_AWAIT)
+            throw new IllegalStateException("can not set throwable to a RpcFuture instance which has already get result " +
+                    "or throwable!");
+
 		this.throwable = throwable;
 		state = STATE_EXCEPTION;
 		
@@ -100,7 +95,7 @@ public class RpcFuture
 		return state != STATE_AWAIT;
 	}
 	
-	public void setRpcFutureListener(RpcFutureListener rpcFutureListener) 
+	public synchronized void setRpcFutureListener(RpcFutureListener rpcFutureListener)
 	{		
 		if(state != STATE_AWAIT)
 			throw new RuntimeException("unable to set listener to a RpcFuture which is done.");

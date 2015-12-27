@@ -6,6 +6,6 @@ public class RpcMethodNotFoundException extends RuntimeException
 	
 	public RpcMethodNotFoundException(String methodName)
 	{
-		super(methodName + " is not found in current service interface!");
+		super("method " + methodName + " is not found in current service interface!");
 	}
 }
